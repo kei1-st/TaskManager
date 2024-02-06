@@ -1,0 +1,18 @@
+export default function NoProject() {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen space-y-4">
+      <img className="w-20 h-20" src="./public/logo.png" alt="Icon Image" />
+      <h3 className="font-gothic text-2xl font-bold text-stone-600">
+        No Project Selected
+      </h3>
+      <p className="text-stone-400 text-large text-bold">
+        Select a project in the left sidebar to get started.
+      </p>
+      <div>
+        <button className="rounded text-stone-300 bg-stone-700 hover:bg-amber-700 px-4 py-2 mt-10">
+          Create new project
+        </button>
+      </div>
+    </div>
+  );
+}
