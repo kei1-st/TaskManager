@@ -6,16 +6,16 @@ import RegisterProject from './components/RegisterProject.jsx';
 
 function App() {
   const [ isCreatePageOpen, setCreatePageOpen ] = useState(false);
-  const [ pages, setPages] = useState([]);
+  const [ projects, setProjects] = useState([]);
 
-  console.log(pages);
+  console.log(projects);
 
   function handleClick(){
     setCreatePageOpen(true);
   }
 
-  function handleSubmit(newPage) {
-    setPages(prevPages => [...prevPages, newPage]);
+  function handleSubmit(newProject) {
+    setProjects(prevProjects => [...prevProjects, newProject]);
     setCreatePageOpen(false); // 送信後に登録ページを閉じる
   }
 
@@ -27,7 +27,7 @@ function App() {
         </SideBar>
         <div className="flex-grow">
           {!isCreatePageOpen && <NoProject onClick={handleClick}/>}
-          {isCreatePageOpen && <RegisterProject onCancel={() => setCreatePageOpen(false)} onSubmit={(page)=>handleSubmit(page)}/>}
+          {isCreatePageOpen && <RegisterProject onCancel={() => setCreatePageOpen(false)} onSave={(project)=>handleSubmit(project)}/>}
         </div>
       </div>
     </>
