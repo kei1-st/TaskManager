@@ -1,15 +1,33 @@
+import { useState } from 'react';
+
 import Input from './Input.jsx';
 
-export default function RegisterProject(){
+export default function RegisterProject({onCancel}){
+    const [data, setData] = useState({title: '' , description: '', due: ''});
+
+    const handleChange = (id, value) => {
+        setData(prevData => ({
+            ...prevData,
+            [id]: value
+        }));
+    };
+
+    const handleCancel = () => {
+        setData({title: '' , description: '', due: ''});
+        onCancel();
+    };
+
+    console.log(data);
+
     return(
-        <form action="/submit-form" method="post" className="flex flex-col justify-center items h-screen w-10/12 space-y-4 ml-8 mr-4">
+        <form className="flex flex-col justify-center items h-screen w-10/12 space-y-4 ml-8 mr-4">
             <div className='flex flex-row justify-end'>
-                <input className='m-2 text-sm' type="button" value="Cancel"/>
-                <input className='bg-black text-white rounded m-2 px-4 py-1 text-sm' type="submit" value="Save"/>
+                <button className='m-2 text-sm' onClick={handleCancel}> Cancel </button>
+                <button className='bg-black text-white rounded m-2 px-4 py-2 text-sm'> Submit </button>
             </div>
-            <Input label="TITLE" id="name" type="text"/>
-            <Input label="DESCRIPTION" id="description" type="text" height="h-12"/>
-            <Input label="DUE DATE" id="due" type="date"/>
+            <Input label="TITLE" id="name" type="text" value={data.title} onChange={(e) => handleChange(e.target.id, e.target.value)}/>
+            <Input label="DESCRIPTION" id="description" type="text" value={data.description} height="h-12" onChange={(e) => handleChange(e.target.id, e.target.value)}/>
+            <Input label="DUE DATE" id="due" type="date" value={data.due} onChange={(e) => handleChange(e.target.id, e.target.value)}/>
         </form>
     );
 }

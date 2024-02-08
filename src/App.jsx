@@ -18,8 +18,8 @@ function App() {
           <p className="text-white">YOUR PROJECTS</p>
         </SideBar>
         <div className="flex-grow">
-          {isCreatePageOpen && <NoProject onClick={handleClick}/>}
-          {!isCreatePageOpen && <RegisterProject/>}
+          {!isCreatePageOpen && <NoProject onClick={handleClick}/>}
+          {isCreatePageOpen && <RegisterProject onCancel={() => setCreatePageOpen(false)}/>}
         </div>
       </div>
     </>
