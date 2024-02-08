@@ -8,8 +8,6 @@ function App() {
   const [ isCreatePageOpen, setCreatePageOpen ] = useState(false);
   const [ projects, setProjects] = useState([]);
 
-  console.log(projects);
-
   function handleClick(){
     setCreatePageOpen(true);
   }
@@ -22,7 +20,7 @@ function App() {
   return (
     <>
       <div className='flex'>
-        <SideBar onClick={handleClick}>
+        <SideBar onClick={handleClick} projects={projects}>
           <p className="text-white">YOUR PROJECTS</p>
         </SideBar>
         <div className="flex-grow">
