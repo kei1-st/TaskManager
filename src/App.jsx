@@ -26,6 +26,11 @@ function App() {
     setCreatePageOpen(false); // 送信後に登録ページを閉じる
   }
 
+  function DeleteProject(id){
+    setProjects(prevProjects => prevProjects.filter(project => project.id !== id));
+    setProjectPageOpen('');
+  }
+
   return (
     <>
       <div className='flex'>
@@ -35,7 +40,7 @@ function App() {
         <div className="flex-grow">
           {!isCreatePageOpen && (isProjectPageOpen == '') && <NoProject onClick={handleClickCreate}/>}
           {isCreatePageOpen && (isProjectPageOpen == '') && <RegisterProject onCancel={() => setCreatePageOpen(false)} onSave={(project)=>handleSubmit(project)}/>}
-          {!isCreatePageOpen && (isProjectPageOpen != '') && <Project project={projects.find(project => project.id === isProjectPageOpen)}/>}
+          {!isCreatePageOpen && (isProjectPageOpen != '') && <Project project={projects.find(project => project.id === isProjectPageOpen)} onDelete={DeleteProject}/>}
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Project({project}){
+export default function Project({project, onDelete}){
 
   const [taskContent, setTaskContent] = useState('');
   const [tasks, setTasks] = useState(project.tasks);
@@ -16,11 +16,15 @@ export default function Project({project}){
     setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
   }
 
+  function DeleteProject(){
+    onDelete(project.id);
+  }
+
   return (
     <div className='flex flex-col h-screen mt-20 mx-5'>
       <div className='flex flex-row justify-between items-center'>
         <h1 className='text-3xl font-extrabold text-stone-600'>{project.title}</h1>
-        <button className='items-end text-stone-600'> Delete </button>
+        <button className='items-end text-stone-600' onClick={DeleteProject}> Delete </button>
       </div>
       <p className='mt-3 text-stone-400'>{project.due}</p>
       <pre className='mt-3 text-stone-700'>{project.description}</pre>
