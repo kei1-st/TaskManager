@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 
-export default function Project({project, onDelete}){
+export default function Project({project, onDelete, onAddTask, onClearTask}){
 
   const [taskContent, setTaskContent] = useState('');
-  const [tasks, setTasks] = useState(project.tasks);
 
   function addTask() {
-    const newTask = { id: uuidv4(), content: taskContent };
-    setTasks(prevTasks => [...prevTasks, newTask]);
+    onAddTask(project, taskContent);
     setTaskContent(''); // タスク追加後は入力フィールドをクリア
-  }
-
-  function clearTask(id) {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
   }
 
   function DeleteProject(){
@@ -37,10 +30,10 @@ export default function Project({project, onDelete}){
         <button className='text-stone-600' onClick={addTask}> Add Task </button>
       </div>
       <div className='flex flex-col mt-4 bg-stone-100 py-4 space-y-2'>
-        {tasks.map(task => {return(
+        {project.tasks.map(task => {return(
           <div key={task.id} className='flex flex-row justify-between mx-3'>
             <p>{task.content}</p>
-            <button onClick={() => clearTask(task.id)}>Clear</button>
+            <button onClick={() => onClearTask(project, task.id)}>Clear</button>
           </div>
           );})}
       </div>

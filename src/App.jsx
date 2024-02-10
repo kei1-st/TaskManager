@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import NoProject from "./components/NoProject.jsx";
 import SideBar from "./components/SideBar.jsx";
@@ -31,6 +32,14 @@ function App() {
     setProjectPageOpen('');
   }
 
+  function AddTask(pro, taskContent){
+    setProjects(prevProjects => prevProjects.map(project => project.id === pro.id ? {...project, tasks: [...project.tasks, {id: uuidv4(), content: taskContent}]} : project));
+  }
+
+  function clearTask(pro, taskId) {
+    setProjects(prevProjects => prevProjects.map(project => project.id === pro.id ? {...project, tasks: project.tasks.filter(task => task.id !== taskId)} : project));
+  }
+
   return (
     <>
       <div className='flex'>
@@ -40,7 +49,7 @@ function App() {
         <div className="flex-grow">
           {!isCreatePageOpen && (isProjectPageOpen == '') && <NoProject onClick={handleClickCreate}/>}
           {isCreatePageOpen && (isProjectPageOpen == '') && <RegisterProject onCancel={() => setCreatePageOpen(false)} onSave={(project)=>handleSubmit(project)}/>}
-          {!isCreatePageOpen && (isProjectPageOpen != '') && <Project project={projects.find(project => project.id === isProjectPageOpen)} onDelete={DeleteProject}/>}
+          {!isCreatePageOpen && (isProjectPageOpen != '') && <Project project={projects.find(project => project.id === isProjectPageOpen)} onDelete={DeleteProject} onAddTask={AddTask} onClearTask={clearTask}/>}
         </div>
       </div>
     </>
