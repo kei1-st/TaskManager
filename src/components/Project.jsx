@@ -6,7 +6,7 @@ export default function Project({project}){
         <button className='items-end text-stone-600'> Delete </button>
       </div>
       <p className='mt-3 text-stone-400'>{project.due}</p>
-      <p className='mt-3 text-stone-700'>{project.description}</p>
+      <pre className='mt-3 text-stone-700'>{project.description}</pre>
       <hr className='h-1 my-6 rounded bg-stone-300'/>
     </div>
   )

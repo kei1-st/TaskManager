@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Input from './Input.jsx';
+import Textarea from './Textarea.jsx';
 
 export default function RegisterProject({onCancel, onSave}){
     const [data, setData] = useState({id: null, title: '' , description: '', due: ''});
@@ -33,7 +34,7 @@ export default function RegisterProject({onCancel, onSave}){
                 <button className='bg-black text-white rounded m-2 px-4 py-2 text-sm' onClick={handleClickSave}> Save </button>
             </div>
             <Input label="TITLE" id="title" type="text" value={data.title} onChange={(e) => handleChange(e.target.id, e.target.value)}/>
-            <Input label="DESCRIPTION" id="description" type="text" value={data.description} height="h-12" onChange={(e) => handleChange(e.target.id, e.target.value)}/>
+            <Textarea label="DESCRIPTION" id="description" type="text" value={data.description} height="h-12" onChange={(e) => handleChange(e.target.id, e.target.value)}/>
             <Input label="DUE DATE" id="due" type="date" value={data.due} onChange={(e) => handleChange(e.target.id, e.target.value)}/>
         </form>
     );
