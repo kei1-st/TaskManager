@@ -29,14 +29,14 @@ export default function Project({project, onDelete, onAddTask, onClearTask}){
         <input type="text" className='bg-stone-200 rounded w-10/12' value={taskContent} onChange={(e) => setTaskContent(e.target.value)}/>
         <button className='text-stone-600' onClick={addTask}> Add Task </button>
       </div>
-      <div className='flex flex-col mt-4 bg-stone-100 py-4 space-y-2'>
+      {project.tasks.length > 0 && <div className='flex flex-col mt-4 bg-stone-100 py-4 space-y-2'>
         {project.tasks.map(task => {return(
           <div key={task.id} className='flex flex-row justify-between mx-3'>
             <p>{task.content}</p>
             <button onClick={() => onClearTask(project, task.id)}>Clear</button>
           </div>
           );})}
-      </div>
+      </div>}
     </div>
   )
 }
