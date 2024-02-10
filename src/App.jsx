@@ -8,7 +8,7 @@ function App() {
   const [ isCreatePageOpen, setCreatePageOpen ] = useState(false);
   const [ projects, setProjects] = useState([]);
 
-  function handleClick(){
+  function handleClickCreate(){
     setCreatePageOpen(true);
   }
 
@@ -20,11 +20,11 @@ function App() {
   return (
     <>
       <div className='flex'>
-        <SideBar onClick={handleClick} projects={projects}>
+        <SideBar onClick={handleClickCreate} projects={projects}>
           <p className="text-white">YOUR PROJECTS</p>
         </SideBar>
         <div className="flex-grow">
-          {!isCreatePageOpen && <NoProject onClick={handleClick}/>}
+          {!isCreatePageOpen && <NoProject onClick={handleClickCreate}/>}
           {isCreatePageOpen && <RegisterProject onCancel={() => setCreatePageOpen(false)} onSave={(project)=>handleSubmit(project)}/>}
         </div>
       </div>
