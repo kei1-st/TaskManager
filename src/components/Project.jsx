@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Project({project}){
 
-  const [task, setTask] = useState('');
+  const [taskContent, setTaskContent] = useState('');
+  const [tasks, setTasks] = useState(project.tasks);
 
-  function addTask(){
-    project.tasks.push(task);
-    setTask('');
+  function addTask() {
+    const newTask = { id: uuidv4(), content: taskContent };
+    setTasks(prevTasks => [...prevTasks, newTask]);
+    setTaskContent(''); // タスク追加後は入力フィールドをクリア
+  }
+
+  function clearTask(id) {
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
   }
 
   return (
@@ -22,8 +29,16 @@ export default function Project({project}){
 
       <h1 className='text-2xl font-extrabold text-stone-600 mb-4'>Tasks</h1>
       <div className='flex flex-row justify-between items-center'>
-        <input type="text" className='bg-stone-200 rounded w-10/12' value={task} onChange={(e) => setTask(e.target.value)}/>
+        <input type="text" className='bg-stone-200 rounded w-10/12' value={taskContent} onChange={(e) => setTaskContent(e.target.value)}/>
         <button className='text-stone-600' onClick={addTask}> Add Task </button>
+      </div>
+      <div className='flex flex-col mt-4 bg-stone-100 py-4 space-y-2'>
+        {tasks.map(task => {return(
+          <div key={task.id} className='flex flex-row justify-between mx-3'>
+            <p>{task.content}</p>
+            <button onClick={() => clearTask(task.id)}>Clear</button>
+          </div>
+          );})}
       </div>
     </div>
   )
