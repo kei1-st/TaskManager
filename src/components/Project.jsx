@@ -1,4 +1,14 @@
+import { useState } from "react";
+
 export default function Project({project}){
+
+  const [task, setTask] = useState('');
+
+  function addTask(){
+    project.tasks.push(task);
+    setTask('');
+  }
+
   return (
     <div className='flex flex-col h-screen mt-20 mx-5'>
       <div className='flex flex-row justify-between items-center'>
@@ -12,10 +22,9 @@ export default function Project({project}){
 
       <h1 className='text-2xl font-extrabold text-stone-600 mb-4'>Tasks</h1>
       <div className='flex flex-row justify-between items-center'>
-        <input className='my-4' type="text" className='bg-stone-200 rounded w-10/12'/>
-        <button className='text-stone-600'> Add Task </button>
+        <input type="text" className='bg-stone-200 rounded w-10/12' value={task} onChange={(e) => setTask(e.target.value)}/>
+        <button className='text-stone-600' onClick={addTask}> Add Task </button>
       </div>
-      {/*<TaskList tasks={project.tasks}/>*/}
     </div>
   )
 }
