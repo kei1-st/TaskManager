@@ -5,7 +5,7 @@ import Input from './Input.jsx';
 import Textarea from './Textarea.jsx';
 
 export default function RegisterProject({onCancel, onSave}){
-    const [data, setData] = useState({id: null, title: '' , description: '', due: ''});
+    const [data, setData] = useState({id: null, title: '' , description: '', due: '', tasks: []});
 
     const handleChange = (id, value) => {
         setData(prevData => ({
@@ -22,7 +22,7 @@ export default function RegisterProject({onCancel, onSave}){
     const handleClickSave = () => {
         data.id = uuidv4();
         onSave(data);
-        setData({id: null, title: '' , description: '', due: ''});
+        setData({id: null, title: '' , description: '', due: '', tasks: []});
     }
 
     console.log(data);
