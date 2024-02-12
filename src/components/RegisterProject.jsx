@@ -28,7 +28,7 @@ export default function RegisterProject({onCancel, onSave}){
     console.log(data);
 
     return(
-        <form className="flex flex-col justify-center items h-screen w-10/12 space-y-4 ml-8 mr-4">
+        <form className="flex flex-col mt-20 mx-5 h-screen w-10/12 space-y-4 ml-8 mr-4">
             <div className='flex flex-row justify-end'>
                 <button className='m-2 text-sm' onClick={handleCancel}> Cancel </button>
                 <button className='bg-black text-white rounded m-2 px-4 py-2 text-sm' onClick={handleClickSave}> Save </button>
