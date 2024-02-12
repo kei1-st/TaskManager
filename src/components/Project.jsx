@@ -37,6 +37,7 @@ export default function Project({project, onDelete, onAddTask, onClearTask}){
           </div>
           );})}
       </div>}
+      {project.tasks.length === 0 && <p className='mt-6 mx-2 text-stone-600'>This project does not hace any tasks yet.</p>}
     </div>
   )
 }
